@@ -21,7 +21,8 @@ func main() {
 		}
 		fmt.Println("ping")
 
-		buffer := make([]byte, 1024)
+		var buffer []byte
+		//buffer := make([]byte, 1024)
 		conn.SetReadDeadline(time.Now().Add(time.Minute))
 
 		n, err := conn.Read(buffer)
