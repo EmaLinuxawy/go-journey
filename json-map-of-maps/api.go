@@ -49,20 +49,23 @@ func Transformation(res []byte) (map[string][]map[string]string, error) {
 		if !ok {
 			fmt.Println("Expected State as string type")
 		}
-		//fmt.Println(state)
+		year, ok := element["Year"].(string)
+		if !ok {
+			fmt.Println("Expected Year as string type")
+		}
+		population, ok := element["Population"].(string)
+		if !ok {
+			fmt.Println("Expected Population as string type")
+		}
+
+		//fmt.Println("population of Year", year, "is:", population)
 		var stateData []map[string]string
 
-		for k, v := range element {
-			v, ok := v.(string)
-			if !ok {
-				fmt.Printf("Expected value for key %q", k)
-			}
+		yearToPopulationMap := make(map[string]string)
+		yearToPopulationMap["Year"] = year
+		yearToPopulationMap["Population"] = population
+		stateData = append(stateData, yearToPopulationMap)
 
-			myMap := make(map[string]string)
-			myMap[k] = v
-
-			stateData = append(stateData, myMap)
-		}
 		output[state] = stateData
 	}
 	return output, nil
