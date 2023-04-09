@@ -44,6 +44,8 @@ func Transformation(res []byte) (map[string][]map[string]string, error) {
 		return output, err
 	}
 
+	var stateData []map[string]string
+
 	for _, element := range data["data"] {
 		state, ok := element["State"].(string)
 		if !ok {
@@ -57,15 +59,11 @@ func Transformation(res []byte) (map[string][]map[string]string, error) {
 		if !ok {
 			fmt.Println("Expected Population as string type")
 		}
-
-		//fmt.Println("population of Year", year, "is:", population)
-		var stateData []map[string]string
-
 		yearToPopulationMap := make(map[string]string)
+
 		yearToPopulationMap["Year"] = year
 		yearToPopulationMap["Population"] = population
-		stateData = append(stateData, yearToPopulationMap)
-
+		stateData = append(output[state], yearToPopulationMap)
 		output[state] = stateData
 	}
 	return output, nil
