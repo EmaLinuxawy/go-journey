@@ -6,7 +6,7 @@ import (
 )
 
 var Response = []byte(`{
-	"input": [
+	"data": [
 			{
 					"ID State": "04000US01",
 					"State": "Alabama",
@@ -36,6 +36,7 @@ var Response = []byte(`{
 }`)
 
 func Transformation(res []byte) (map[string][]map[string]string, error) {
+	output := make(map[string][]map[string]string)
 	var data map[string][]map[string]any
 
 	err := json.Unmarshal(res, &data)
@@ -43,9 +44,7 @@ func Transformation(res []byte) (map[string][]map[string]string, error) {
 		return output, err
 	}
 
-	output := make(map[string][]map[string]string)
-
-	for _, element := range data["input"] {
+	for _, element := range data["data"] {
 		state, ok := element["State"].(string)
 		if !ok {
 			fmt.Println("Expected State as string type")
