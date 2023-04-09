@@ -40,7 +40,7 @@ func Transformation(res []byte) (map[string][]map[string]string, error) {
 
 	err := json.Unmarshal(res, &data)
 	if err != nil {
-		panic(err)
+		return output, err
 	}
 
 	output := make(map[string][]map[string]string)
