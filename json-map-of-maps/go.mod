@@ -1,3 +1,3 @@
-module example.com
+module github.com/EmaLinuxawy/go-apps
 
 go 1.20
