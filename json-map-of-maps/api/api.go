@@ -66,11 +66,7 @@ func Transformation(res []byte) (map[string][]map[string]string, error) {
 		stateData = append(output[state], yearToPopulationMap)
 		output[state] = stateData
 	}
-	//m, err := json.Marshal(output)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
-	//fmt.Println(string(m))
+
 	return output, nil
 }
 
