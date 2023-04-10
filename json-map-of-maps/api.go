@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 )
 
 var Response = []byte(`{
@@ -44,8 +45,6 @@ func Transformation(res []byte) (map[string][]map[string]string, error) {
 		return output, err
 	}
 
-	var stateData []map[string]string
-
 	for _, element := range data["data"] {
 		state, ok := element["State"].(string)
 		if !ok {
@@ -59,6 +58,7 @@ func Transformation(res []byte) (map[string][]map[string]string, error) {
 		if !ok {
 			fmt.Println("Expected Population as string type")
 		}
+		var stateData []map[string]string
 		yearToPopulationMap := make(map[string]string)
 
 		yearToPopulationMap["Year"] = year
@@ -66,6 +66,11 @@ func Transformation(res []byte) (map[string][]map[string]string, error) {
 		stateData = append(output[state], yearToPopulationMap)
 		output[state] = stateData
 	}
+	m, err := json.Marshal(output)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(string(m))
 	return output, nil
 }
 

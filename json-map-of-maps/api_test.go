@@ -13,7 +13,7 @@ func TestApi(t *testing.T) {
 	}
 	fmt.Println(result)
 
-	_, ok := result["Total Population"]
+	_, ok := result["Alabama"]
 	if !ok {
 		fmt.Println(ok)
 		t.Error("faild to get state")
